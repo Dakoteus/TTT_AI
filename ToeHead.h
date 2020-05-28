@@ -7,8 +7,8 @@ using namespace std;
 
 //functions are all listed here
 int MinMax(vector<char>& board);
-int Min(vector<char>& board);
-int Max(vector<char>& board);
+int Min(vector<char>& board, int a, int b);
+int Max(vector<char>& board, int a, int b);
 vector<char> Initialize_Board(int n);
 void Display_Board(vector<char>& board);
 bool Check_Move(vector<char>& board, int move);

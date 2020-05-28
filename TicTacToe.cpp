@@ -13,7 +13,7 @@ int MinMax(vector<char> &board)
 		copy = board;
 		copy[actions[i]] = 'o';
 		//board[actions[i]] = 'o';
-		int min = Min(copy);
+		int min = Min(copy,-9999,9999);
 		if (min > max)
 		{
 			max = min;
@@ -23,7 +23,7 @@ int MinMax(vector<char> &board)
 	return j;
 }
 
-int Min(vector<char> &board)
+int Min(vector<char> &board, int a, int b)
 {
 	int state = _3x3Win(board);
 	if (state != 0)
@@ -39,16 +39,15 @@ int Min(vector<char> &board)
 		copy = board;
 		copy[actions[i]] = 'x';
 		//board[actions[i]] = 'o';
-		int max = Max(copy);
-		if (v > max)
-		{
-			v = max;
-		}
+		int max = Max(copy,a,b);
+		if (v > max){v = max;}
+		if (v <= a){return v;}
+		if (v < b) { b = v; }
 	}
 	return v;
 }
 
-int Max(vector<char> &board)
+int Max(vector<char> &board, int a, int b)
 {
 	int state = _3x3Win(board);
 	vector<int> actions = Actions(board);
@@ -64,11 +63,10 @@ int Max(vector<char> &board)
 		copy = board;
 		copy[actions[i]] = 'o';
 		//board[actions[i]] = 'x';
-		int min = Min(copy);
-		if (v < min) 
-		{
-			v = min;
-		}
+		int min = Min(copy,a,b);
+		if (v < min) {v = min;}
+		if (v >= b){return v;}
+		if (v > a) { a = v; }
 	}
 	return v;
 }
